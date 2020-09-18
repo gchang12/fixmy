@@ -1,3 +1,7 @@
+from fixmy.imports import *
+from fixmy.prefixes import *
+from fixmy.init_files import *
+
 #	For use in fixing import statements for user-defined modules within parent module
 
 #	Usual use of module as follows:
