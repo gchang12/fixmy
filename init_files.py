@@ -1,7 +1,7 @@
 from fixmy.prefixes import *
 
 
-def fix_init():
+def mass_replace(replace_with=''):
     initlist = tuple()
     for stuff in old_to_new:
         mdl = stuff[-1] + ' import *'
@@ -21,11 +21,25 @@ def fix_init():
             e[newpath] += stuff,
         else:
             e[newpath] = stuff,
+    t={}
     for key, val in e.items():
         with open(key, 'w') as wfile:
             for m in val:
-                wfile.write(m), wfile.write('\n')
+                if replace_with == '':
+                    wfile.write(m), wfile.write('\n')
+                else:
+                    wfile.write(replace_with)
+                    break
+        with open(key,'r') as rfile:
+            t[key] = tuple()
+            for line in rfile.readlines():
+                t[key]+=line,
+    for ioio in t.values():
+        if ioio[0] != replace_with:
+            return False
+    return True
 
 
 if __name__=='__main__':
-    fix_init()
+    x=mass_replace(replace_with='#')
+    print(x)

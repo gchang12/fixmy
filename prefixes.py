@@ -70,21 +70,18 @@ if __name__=='__main__':
         mdl=stuff[-1]+' import *'
         if mdl not in initlist:
             initlist+=mdl,
-    home=sep.join(destination.split(sep)[:-1])
+    home=sep.join(source.split(sep)[:-1])
     f=['__init__.py']
-    p=home.split('\\')
-    e={}
+    p=home.split(sep)
+    l=tuple()
     for stuff in initlist:
         u=stuff[5:-9]
         v=u.split('.')[:-1]
         newpath=sep.join(p+v+f)
-        if newpath in e.keys():
-            if f[0][:-3] in u:
-                continue
-            e[newpath]+=stuff,
-        else:
-            e[newpath]=stuff,
-    for key,val in e.items():
-        with open(key,'w') as wfile:
-            for m in val:
-                wfile.write(m),wfile.write('\n')
+        if newpath not in l:
+            l+=newpath,
+    for thin in l:
+        print(thin)
+        with open(thin,'r') as rfile:
+            for line in rfile.readlines():
+                print(line)
